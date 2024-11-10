@@ -14,10 +14,12 @@ decimales y números binarios. El programa debe incluir un menú con las siguien
 
 # Implementación
 Para la implementación de su proyecto, tome en cuenta lo siguiente: 
-• Deberá validar los datos ingresados por el usuario. 
-• En la opción 2 se asumirá que el número binario ingresado por el usuario es de 8 bits. 
-• En la opción 3, el programa generará un número aleatorio entre 10 y 50, mostrando el número 
-en decimal junto con su coversión a binario. 
+
+  • Deberá validar los datos ingresados por el usuario. 
+  
+  • En la opción 2 se asumirá que el número binario ingresado por el usuario es de 8 bits. 
+  
+  • En la opción 3, el programa generará un número aleatorio entre 10 y 50, mostrando el número en decimal junto con su coversión a binario. 
 
 # Entregables
   • Código en ensamblador
