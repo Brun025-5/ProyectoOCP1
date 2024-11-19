@@ -1,119 +1,146 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <math.h>
 #include <time.h>
 
-bool esNumero(int n, char* mensaje){
-	if(n != 1){
-		printf("%s\n", mensaje);
-		while (getchar() != '\n');
+void clearBuffer()
+{
+	while (getchar() != '\n');
+}
+
+bool validarEntrada(int *entrada, char *errmsg)
+{
+	if (scanf("%d", entrada) != 1)
+	{
+		clearBuffer();
+		*entrada = 0;
+		printf("%s\n", errmsg);
 		return false;
-	}return true;
+	}
+	clearBuffer();
+	return true;
 }
 
-int binarioADecimal(int n){
-	int num;
-	int digito;
-	int suma = 0;
-	int cont = 0;
-	while(n > 0){
-		cont++;
-		if(cont > 8){
-			printf("Número con más de 8 bits. Por favor, ingrese uno con 8 bits o menos.\n\n");
-			return -1;
+bool convertirDecimalABinario(int *decimal)
+{
+	char resultado[9];
+	resultado[8] = '\0';
+	int copiaD = *decimal;
+	if (*decimal < 0)
+	{
+		printf("Por favor, ingrese un número positivo\n\n");
+		return false;
+	}
+	if (*decimal > 255)
+	{
+		printf("Por favor, ingrese un número menor a 255\n\n");
+		return false;
+	}
+	for (int contador = 7; contador >= 0; contador--)
+	{
+		if (copiaD % 2 == 1)
+			resultado[contador] = '1';
+		else
+			resultado[contador] = '0';
+		copiaD /= 2;
+	}
+	printf("El valor %d en binario es: %s\n", *decimal, resultado);
+	printf("-------------------------------------\n\n");
+	return true;
+}
+
+bool convertirBinarioADecimal(int *binario)
+{
+	int digito, copiaB = *binario, pot = 1, resultado = 0;
+	if (*binario < 0)
+	{
+		printf("Por favor, ingrese un número positivo\n\n");
+		return false;
+	}
+	if (*binario > 99999999)
+	{
+		printf("Por favor, ingrese un número de 8 bits\n\n");
+		return false;
+	}
+	while (copiaB > 0)
+	{
+		digito = copiaB % 10;
+		if (digito != 0 && digito != 1)
+		{
+			printf("Valor ingresado no válido\n");
+			printf("Por favor, ingrese un número binario\n\n");
+			return false;
 		}
-                digito = n % 10;
-		if(digito > 1){
-			printf("Número no binario. Verifique los dígitos.\n\n");
-			return -1;
-		}else
-			suma += digito * pow(2, cont-1);
-                n = n / 10;
+		copiaB /= 10;
+		resultado += digito * pot;
+		pot *= 2;
 	}
-        return suma;
+	printf("El valor %d en decimal es: %d\n", *binario, resultado);
+	printf("-------------------------------------\n\n");
+	return true;
 }
 
-int generarAleatorio(){
-	time_t tiempoActual = time(NULL);
-	int aleatorio = (tiempoActual % (50 - 10 + 1)) + 10;
+int generarAleatorio()
+{
+	srand(time(NULL));
+	int aleatorio = 10 + (rand() % 41);
 	return aleatorio;
-}
-
-void decimalABinario(int n){
-	int binario[32];
-	int i = 0;
-	printf("El número en binario es: ");
-	while(n!=0){
-		if(n%2 == 0){
-			binario[i] = 0;
-			n = n/2;
-		}else{
-			binario[i] = 1;
-			n = floor(n/2);
-		} i++;
-	}
-	for(int j = i-1; j >= 0; j--){
-		printf("%d", binario[j]);
-	}printf("\n-------------------------------------\n\n");
 }
 
 int main()
 {
-	bool end = true, endin;
-        int opt, optin = 0;
+	bool flagLoop = true, flagOpt;
+	int opt, entrada = 0;
 
-	printf("1. Convertir Decimal a Binario\n2. Convertir Binario a Decimal\n3. Generar un número aleatorio\n4. Salir\n");
+	while (flagLoop)
+	{
+		printf("------------ MENU ------------\n");
+		printf("1. Convertir Decimal a Binario\n");
+		printf("2. Convertir Binario a Decimal\n");
+		printf("3. Generar un número aleatorio\n");
+		printf("4. Salir\n\n");
+		printf("Ingrese una opción: ");
 
-        while(end){
-
-		printf("Ingrese una opción: \n");
-		if(!esNumero(scanf("%d", &opt), "Entrada inválida.\n")){
-			printf("Opciones válidas: \n");
-                    	printf("\t1. Convertir Decimal a Binario\n\t2. Convertir Binario a Decimal\n\t3. Generar un número aleatorio\n\t4. Salir\n");
+		if (!validarEntrada(&opt, "Se ingresó una opción no válida.\n"))
 			continue;
-		}if(opt == 1){
-			endin = true;
+		switch (opt)
+		{
+		case 1:
+			flagOpt = true;
 			printf("\n-----Convertir Decimal a Binario-----\n");
-			while(endin){
-				printf("Ingrese el número decimal: \n");
-				if(!esNumero(scanf("%d", &optin), "Entrada inválida. Por favor ingrese un número.\n"))
+			while (flagOpt)
+			{
+				printf("Ingrese un número en base 10: ");
+				if (!validarEntrada(&entrada, "Entrada no válida. Por favor ingrese un número.\n"))
 					continue;
-				else
-					endin = false;
+				flagOpt = !convertirDecimalABinario(&entrada);
 			}
-			decimalABinario(optin);
-		}else if(opt == 2){
-			endin = true;
-			int decimal;
+			break;
+		case 2:
+			flagOpt = true;
 			printf("\n-----Convertir Binario a Decimal-----\n");
-			while(endin){
-				printf("Ingrese el número binario: \n");
-				if(!esNumero(scanf("%d", &opt), "Entrada inválida. Por favor ingrese un número.\n"))
+			while (flagOpt)
+			{
+				printf("Ingrese un número en binario: ");
+				if (!validarEntrada(&entrada, "Entrada no válida. Por favor ingrese un número.\n"))
 					continue;
-				decimal = binarioADecimal(opt);
-				if(decimal == -1)
-					continue;
-				else
-					endin = false;
+				flagOpt = !convertirBinarioADecimal(&entrada);
 			}
-			printf("El número decimal es: %d\n", decimal);
-			printf("-------------------------------------\n\n");
-		}else if(opt == 3){
+			break;
+		case 3:
 			printf("\n-----Generar un Número Aleatorio-----\n");
-			int aleatorioD = generarAleatorio();
-			printf("El número en base decimal: %d\n", aleatorioD);
-			decimalABinario(aleatorioD);
-		}else if(opt == 4){
-			printf("HASTA LUEGO\n");
-			end = false;
-		}else{
-			printf("Entrada inválida.\n");
-			printf("Opciones válidas: \n");
-                    	printf("\t1. Convertir Decimal a Binario\n\t2. Convertir Binario a Decimal\n\t3. Generar un número aleatorio\n\t4. Salir\n\n");
+			int aleatorio = generarAleatorio();
+			printf("Número aleatorio generado: %d\n", aleatorio);
+			convertirDecimalABinario(&aleatorio);
+			break;
+		case 4:
+			printf("Saliendo del programa...\n");
+			flagLoop = false;
+			break;
+		default:
+			printf("Se ingresó una opción no válida\n");
+			break;
 		}
-        }
-
+	}
+	return 0;
 }
-
-
