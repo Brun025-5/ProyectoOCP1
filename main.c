@@ -138,7 +138,7 @@ int main()
 			flagLoop = false;
 			break;
 		default:
-			printf("Se ingresó una opción no válida\n");
+			printf("Se ingresó una opción no válida\n\n");
 			break;
 		}
 	}
