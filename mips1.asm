@@ -1,16 +1,16 @@
 .data
-	menu: .asciiz "-----------------MENU-----------------\n1. Convertir Decimal a Binario\n2. Convertir Binario a Decimal\n3. Generar un número aleatorio\n4. Salir\n"
+	menu: .asciiz "-----------------MENU-----------------\n1. Convertir Decimal a Binario\n2. Convertir Binario a Decimal\n3. Generar un número aleatorio\n4. Salir\n\n"
 	ingreso: .asciiz "Ingrese una opción: \n"
 	caso1: .asciiz "\n-----Convertir Decimal a Binario-----\n"
 	caso2: .asciiz "\n-----Convertir Binario a Decimal-----\n"
 	caso3: .asciiz "\n-----Generar un Número Aleatorio-----\n"
 	print1: .asciiz "El número en binario es: "
-	print2: .asciiz "El número decimal es: "
-	error: .asciiz "\t---------Entrada inválida--------\n"
-	error2a: .asciiz "\t--El número tiene más de 8 bits--\n"
-	error2b: .asciiz "\t-----El número no es binario-----\n"
-	ingreso1: .asciiz "Ingrese el número decimal: \n"
-	ingreso2: .asciiz "Ingrese el número binario (máx 8 bits): \n"
+	print2: .asciiz "El número en decimal es: "
+	error: .asciiz "---------Entrada inválida--------\n"
+	error2a: .asciiz "--El número tiene más de 8 bits--\n"
+	error2b: .asciiz "-----El número no es binario-----\n"
+	ingreso1: .asciiz "Ingrese un número decimal: \n"
+	ingreso2: .asciiz "Ingrese un número binario (máx 8 bits): \n"
 	finCaso: .asciiz "--------------------------------------\n\n"
 	salto: .asciiz "\n"
 	
@@ -84,7 +84,7 @@
 		addi $a0, $a0, 10	#[0,40] -> [10, 50]
 		move $t2, $a0
 		li $v0, 4
-		la $a0, print1
+		la $a0, print2
 		syscall
 		li $v0, 1
 		move $a0, $t2
