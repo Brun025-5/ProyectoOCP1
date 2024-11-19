@@ -59,12 +59,12 @@ El programa valida las entradas del usuario para asegurar que sean apropiadas pa
 
 #### **3. Pasos para Compilar y Ejecutar**
 1. **Guardar el código fuente:**
-   Guarde el programa en un archivo llamado `menu_binario.c`.
+   Guarde el programa en un archivo llamado `main.c`.
 
 2. **Compilar el programa:**
    Utilice el comando:
    ```bash
-   gcc -o programa menu_binario.c
+   gcc -o programa main.c
    ```
 
 3. **Ejecutar el programa:**
