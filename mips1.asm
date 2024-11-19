@@ -7,6 +7,7 @@
 	print1: .asciiz "El número en binario es: "
 	print2: .asciiz "El número en decimal es: "
 	error: .asciiz "---------Entrada inválida--------\n"
+	error1a: .asciiz "--Número mayor a 255. Ingrese un número menor--\n"
 	error2a: .asciiz "--El número tiene más de 8 bits--\n"
 	error2b: .asciiz "-----El número no es binario-----\n"
 	ingreso1: .asciiz "Ingrese un número decimal: \n"
@@ -48,7 +49,13 @@
  		beq $t1, -1, input1
  		move $a0, $t6
  		Jal convertirAInt
- 		move $a0, $v0
+ 		sgt $t1, $v0, 255
+ 		beq $t1, $zero, c2_cast
+ 		li $v0, 4
+ 		la $a0, error1a
+ 		syscall
+ 		J input1 
+ 	c2_cast:move $a0, $v0
  		Jal decimalABinario
  		li $v0, 4
 		la $a0, finCaso
