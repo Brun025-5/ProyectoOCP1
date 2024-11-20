@@ -105,8 +105,13 @@
 		la $a0, finCaso
 		syscall
 		J loop
-	case4:	bne $t1, 52, loop
+	case4:	bne $t1, 52, default
 		li $t0, 0
+		J loop
+	default:la $a0, error
+		syscall
+		la $a0, salto
+		syscall
 		J loop
 				
 	esNumero:		addi $sp, $sp, -4
