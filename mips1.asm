@@ -1,17 +1,18 @@
 .data
 	menu: .asciiz "------------ MENU ------------\n1. Convertir Decimal a Binario\n2. Convertir Binario a Decimal\n3. Generar un número aleatorio\n4. Salir\n\n"
-	ingreso: .asciiz "Ingrese una opción: \n"
+	ingreso: .asciiz "Ingrese una opción: "
 	caso1: .asciiz "\n-----Convertir Decimal a Binario-----\n"
 	caso2: .asciiz "\n-----Convertir Binario a Decimal-----\n"
 	caso3: .asciiz "\n-----Generar un Número Aleatorio-----\n"
 	print1: .asciiz "El número en binario es: "
 	print2: .asciiz "El número en decimal es: "
 	error: .asciiz "Entrada no válida. Por favor ingrese un número.\n\n"
+	errorop: .asciiz "Se ingresó una opción no válida\n"
 	error1a: .asciiz "Por favor, ingrese un número menor a 255\n\n"
 	error2a: .asciiz "Por favor, ingrese un número de 8 bits\n\n"
 	error2b: .asciiz "Valor ingresado no válido\nPor favor, ingrese un número binario\n\n"
-	ingreso1: .asciiz "Ingrese un número en base 10: \n"
-	ingreso2: .asciiz "Ingrese un número en binario: \n"
+	ingreso1: .asciiz "Ingrese un número en base 10: "
+	ingreso2: .asciiz "Ingrese un número en binario: "
 	finCaso: .asciiz "--------------------------------------\n\n"
 	salto: .asciiz "\n"
 	
@@ -108,7 +109,7 @@
 	case4:	bne $t1, 52, default
 		li $t0, 0
 		J loop
-	default:la $a0, error
+	default:la $a0, errorop
 		syscall
 		la $a0, salto
 		syscall
