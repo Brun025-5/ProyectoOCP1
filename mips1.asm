@@ -13,7 +13,7 @@
 	error2b: .asciiz "Valor ingresado no válido\nPor favor, ingrese un número binario\n\n"
 	ingreso1: .asciiz "Ingrese un número en base 10: "
 	ingreso2: .asciiz "Ingrese un número en binario: "
-	finCaso: .asciiz "--------------------------------------\n\n"
+	finCaso: .asciiz "-------------------------------------\n\n"
 	salto: .asciiz "\n"
 	
 	buffer: .space 32

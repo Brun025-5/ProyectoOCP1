@@ -101,7 +101,7 @@ int main()
 		printf("4. Salir\n\n");
 		printf("Ingrese una opción: ");
 
-		if (!validarEntrada(&opt, "Se ingresó una opción no válida.\n"))
+		if (!validarEntrada(&opt, "Se ingresó una opción no válida\n"))
 			continue;
 		switch (opt)
 		{
